@@ -62,4 +62,3 @@ extern float *jval_farray(Jval);
 extern char *jval_carray(Jval);
 
 #endif
-© 2021 GitHub, Inc.
