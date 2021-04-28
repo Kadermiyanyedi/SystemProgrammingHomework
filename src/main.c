@@ -25,6 +25,18 @@ void writeOutputFile(char *data,char*filename){
 	fclose(fp);
 }
 
+# Kilit dosyasının okunacağı fonksiyon
+char *encode(char *data, char *filename){
+    char word[200];
+    FILE *fp = fopen(filename,"a");
+    while( fscanf(fp, "%s", word) != EOF ) 
+    {
+    	if(data == is->data)
+    	
+    }
+	fclose(fp);
+}
+
 int main(int argc, char** argv) {
     //readInputFile();
     
