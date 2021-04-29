@@ -25,51 +25,34 @@ void writeOutputFile(char *data,char*filename){
 	fclose(fp);
 }
 
-# Kilit dosyasının okunacağı fonksiyon
+// Kilit dosyasının okunacağı fonksiyon
 char *encode(char *data, char *filename){
-    char word[200];
-    FILE *fp = fopen(filename,"a");
-    while( fscanf(fp, "%s", word) != EOF ) 
-    {
-    	if(data == is->data)
+    // char word[200];
+    // FILE *fp = fopen(filename,"a");
+    // while( fscanf(fp, "%s", word) != EOF ) 
+    // {
+    // 	if(data == is->data)
     	
-    }
-	fclose(fp);
+    // }
+	// fclose(fp);
 }
 
 int main(int argc, char** argv) {
     //readInputFile();
     
-	
-	
-	int d=0;
-	char* parameter;
-	char *inputFileName;
-	char *outputFileName;
-	const char *delp;
-	char* dz[4];
-	printf("komut girin\n");
-	char command[40];
-	scanf("%[^\n]s",command);
-	delp = strtok (command, " &");
-	while (delp != NULL)  {
-      printf ("%s\n", delp);
-	  dz[d]=delp;	  
-	  d++;	  
-      delp = strtok (NULL, " &");
+    if (argc != 4) {
+    fprintf(stderr, "usage: printwords filename\n");
+    exit(1);
     }
+	char *parameter = argv[1];
+	char *inputFileName = argv[2];
+	char *outputFileName = argv[3];
 	
-	parameter=dz[1];
-	inputFileName=dz[2];
-	outputFileName=dz[3];
+	printf ("%s ",parameter);
+	printf ("%s ",inputFileName);
+	printf ("%s ",outputFileName);
 	
-	//printf (parameter);
-	//printf (inputFileName);
-	//printf (outputFileName);
-	
-	writeOutputFile("hello",outputFileName);
+	//writeOutputFile("hello",outputFileName);
     
-	
-	
     return 0;
 }
