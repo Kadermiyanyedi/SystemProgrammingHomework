@@ -19,7 +19,7 @@ void readInputFile(char*filename){
     jettison_inputstruct(is);
 }
 
-void writeOutputFile(char *data,char*filename){
+void writeOutputFile(char *data, char*filename){
     FILE *fp = fopen(filename,"a");
     fprintf(fp,"%s \n", data);
 	fclose(fp);
@@ -27,14 +27,38 @@ void writeOutputFile(char *data,char*filename){
 
 // Kilit dosyasının okunacağı fonksiyon
 char *encode(char *data, char *filename){
-    // char word[200];
-    // FILE *fp = fopen(filename,"a");
-    // while( fscanf(fp, "%s", word) != EOF ) 
-    // {
-    // 	if(data == is->data)
-    	
+    IS is;
+    int i;
+
+    is = new_inputstruct(filename);
+    if (is == NULL) {
+        perror("error");
+        exit(1);
+    }
+
+    while(get_line(is) >= 0) {
+        char *text = "";
+        for (i = 0; i < is->NF; i++) {
+            text = is->text1;
+            if(strstr(text, data)){
+                returnValue(text);
+            }
+        }
+    }
+    jettison_inputstruct(is);
+}
+
+void returnValue(char *data){
+    // char *value = "";
+    // for(int i=0; i<strlen(data); i++){
+    //     value += data[i];
+    //     if(data[i] == ':'){
+    //         value = "";
+    //     }
+    //         printf("%s",value);
+
     // }
-	// fclose(fp);
+   
 }
 
 int main(int argc, char** argv) {
@@ -48,11 +72,12 @@ int main(int argc, char** argv) {
 	char *inputFileName = argv[2];
 	char *outputFileName = argv[3];
 	
-	printf ("%s ",parameter);
-	printf ("%s ",inputFileName);
-	printf ("%s ",outputFileName);
+	// printf ("%s ",parameter);
+	// printf ("%s ",inputFileName);
+	// printf ("%s ",outputFileName);
 	
 	//writeOutputFile("hello",outputFileName);
+    encode("merhaba", inputFileName);
     
     return 0;
 }
