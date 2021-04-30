@@ -42,7 +42,10 @@ char *encode(char *data, char *filename){
             if(strstr(is->fields[i], data)){
                 //returnValue(text, "-e");
                 text = is->fields[i + 1];
-                return text;
+                char *ptr = strtok(text, "\"\"");
+                if(ptr != NULL){
+                    return ptr;
+                }
             }
         }
     }
@@ -68,7 +71,10 @@ char *decode(char *data, char *filename){
             if(strstr(is->fields[i], data)){
                 //returnValue(text, "-e");
                 text = is->fields[i - 1];
-                return text;
+                char *ptr = strtok(text,"\"\"");
+                if(ptr != NULL){
+                    return ptr;
+                }
             }
         }
     }
@@ -92,7 +98,7 @@ int main(int argc, char** argv) {
 	// printf ("%s ",outputFileName);
 	
 	//writeOutputFile("hello",outputFileName);
-    encode("merhaba", inputFileName);
+    printf("%s",encode("merhaba", inputFileName));
     
     return 0;
 }
