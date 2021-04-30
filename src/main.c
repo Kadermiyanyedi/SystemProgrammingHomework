@@ -48,18 +48,25 @@ char *encode(char *data, char *filename){
     jettison_inputstruct(is);
 }
 
-void returnValue(char *data){
-    // char *value = "";
-    // for(int i=0; i<strlen(data); i++){
-    //     value += data[i];
-    //     if(data[i] == ':'){
-    //         value = "";
-    //     }
-    //         printf("%s",value);
-
-    // }
-   
+# prints digit value
+void returnValue(char *data)
+{
+    char key[100] = ""
+        ,value[100] = "";
+    char * ptr;
+    char delim[] = ":";
+    
+    ptr = strtok (data, delim); 
+    if (ptr != NULL) 
+    {
+        strcpy(key, ptr); 
+        ptr = strtok (NULL, " "); 
+        if (ptr != NULL) 
+            strcpy(value, ptr); 
+    }
+    printf("%s", value); 
 }
+
 
 int main(int argc, char** argv) {
     //readInputFile();
