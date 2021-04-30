@@ -50,6 +50,32 @@ char *encode(char *data, char *filename){
     return data;
 }
 
+
+// Kilit dosyasının okunacağı fonksiyon
+char *decode(char *data, char *filename){
+    IS is;
+    int i;
+
+    is = new_inputstruct(filename);
+    if (is == NULL) {
+        perror("error");
+        exit(1);
+    }
+
+    while(get_line(is) >= 0) {
+        char *text = "";
+        for (i = 0; i < is->NF; i++) {
+            if(strstr(is->fields[i], data)){
+                //returnValue(text, "-e");
+                text = is->fields[i - 1];
+                return text;
+            }
+        }
+    }
+    jettison_inputstruct(is);
+    return data;
+}
+
 int main(int argc, char** argv) {
     //readInputFile();
     
