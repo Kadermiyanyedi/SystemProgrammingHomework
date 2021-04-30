@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "../include/fields.h"
-void readInputFile(char*filename){
+void readInputFile(char* filename){
     IS is;
     int i;
 
@@ -39,34 +39,16 @@ char *encode(char *data, char *filename){
     while(get_line(is) >= 0) {
         char *text = "";
         for (i = 0; i < is->NF; i++) {
-            text = is->text1;
-            if(strstr(text, data)){
-                returnValue(text);
+            if(strstr(is->fields[i], data)){
+                //returnValue(text, "-e");
+                text = is->fields[i + 1];
+                return text;
             }
         }
     }
     jettison_inputstruct(is);
+    return data;
 }
-
-# prints digit value
-void returnValue(char *data)
-{
-    char key[100] = ""
-        ,value[100] = "";
-    char * ptr;
-    char delim[] = ":";
-    
-    ptr = strtok (data, delim); 
-    if (ptr != NULL) 
-    {
-        strcpy(key, ptr); 
-        ptr = strtok (NULL, " "); 
-        if (ptr != NULL) 
-            strcpy(value, ptr); 
-    }
-    printf("%s", value); 
-}
-
 
 int main(int argc, char** argv) {
     //readInputFile();
