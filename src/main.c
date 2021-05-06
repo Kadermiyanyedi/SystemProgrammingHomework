@@ -30,13 +30,22 @@ void addJRBTree(char *parametre, JRB b){
     while(get_line(is) >= 0) {
         p = malloc(sizeof(Huffman));
         if(is->fields[i+1] != NULL && is->fields[i] != NULL && !strstr(is->fields[i], "}")){
-            //strcat(is->fields[i], is->fields[i+1]);
-            //printf("%s \n", is->fields[i]);
-            p->key = (char *) malloc(sizeof(char)*(strlen(is->fields[i])+1));
-            strcpy(p->key, is->fields[i]);
-            p->value = (char *) malloc(sizeof(char)*(strlen(is->fields[i+1])+1));
-            strcpy(p->value, is->fields[i+1]);
-           (void) jrb_insert_str(b, p->key, new_jval_v((void *) p));
+
+            if(strstr(parametre, "e")){
+                p->key = (char *) malloc(sizeof(char)*(strlen(is->fields[i+1])+1));
+                strcpy(p->key, is->fields[i+1]);
+                p->value = (char *) malloc(sizeof(char)*(strlen(is->fields[i])+1));
+                strcpy(p->value, is->fields[i]);
+                (void) jrb_insert_str(b, p->key, new_jval_v((void *) p));
+            }
+            if(strstr(parametre, "d")){
+                p->key = (char *) malloc(sizeof(char)*(strlen(is->fields[i])+1));
+                strcpy(p->key, is->fields[i]);
+                p->value = (char *) malloc(sizeof(char)*(strlen(is->fields[i+1])+1));
+                strcpy(p->value, is->fields[i+1]);
+                (void) jrb_insert_str(b, p->key, new_jval_v((void *) p));
+            }
+
         }
     }
     jettison_inputstruct(is);
@@ -133,7 +142,7 @@ int main(int argc, char** argv) {
 	char *inputFileName = argv[2];
 	char *outputFileName = argv[3];
     b = make_jrb();
-	addJRBTree("e", b);
+	addJRBTree("-e", b);
     jrb_traverse(bn, b) {
         p = (Huffman *) bn->val.v;
         printf("%s %s\n", p->key, p->value);
