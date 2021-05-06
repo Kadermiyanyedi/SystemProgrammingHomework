@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <string.h>
-#include "jval.h"
+#include "../include/jval.h"
 
 Jval JNULL;
 
