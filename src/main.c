@@ -52,7 +52,7 @@ void addJRBTree(char *parametre, JRB b){
 
 }
 // Kilit dosyasının okunacağı fonksiyon
-char *encode(char *data){
+char *returnKey(char *data){
 
     jrb_traverse(bn, b) {
         p = (Huffman *) bn->val.v;
@@ -69,24 +69,6 @@ char *encode(char *data){
     return data;
 }
 
-
-// Kilit dosyasının okunacağı fonksiyon
-char *decode(char *data){
-
-    jrb_traverse(bn, b) {
-        p = (Huffman *) bn->val.v;
-
-        char *text = "";
-        if(strstr(p->key, data)){
-                text = p->value;
-                char *ptr = strtok(text, "\"\"");
-                if(ptr != NULL){
-                    return ptr;
-                }
-        }
-    }
-    return data;
-}
 
 void readInputFile(char* filename, char *operation){
     IS is;
@@ -100,12 +82,7 @@ void readInputFile(char* filename, char *operation){
 
     while(get_line(is) >= 0) {
         for (i = 0; i < is->NF; i++) {
-            if(strstr(operation, "e")){
-                printf("%s\n",encode(is->fields[i]));
-            }
-            if(strstr(operation, "d")){
-                printf("%s\n",decode(is->fields[i]));
-            }
+            printf("%s\n",returnKey(is->fields[i]));
         }
     }
     jettison_inputstruct(is);
