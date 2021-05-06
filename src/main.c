@@ -5,6 +5,7 @@
 
 JRB b;
 JRB bn;
+char* outputFileName;
 
 typedef struct {
   char *key;
@@ -12,8 +13,8 @@ typedef struct {
 } Huffman;
 Huffman *p;
 
-void writeOutputFile(char *data, char*filename){
-    FILE *fp = fopen(filename,"a");
+void writeOutputFile(char *data){
+    FILE *fp = fopen(outputFileName, "a");
     fprintf(fp,"%s \n", data);
 	fclose(fp);
 }
@@ -82,7 +83,7 @@ void readInputFile(char* filename, char *operation){
 
     while(get_line(is) >= 0) {
         for (i = 0; i < is->NF; i++) {
-            printf("%s\n",returnKey(is->fields[i]));
+            writeOutputFile(returnKey(is->fields[i]));
         }
     }
     jettison_inputstruct(is);
@@ -97,7 +98,7 @@ int main(int argc, char** argv) {
     }
 	char *parameter = argv[1];
 	char *inputFileName = argv[2];
-	char *outputFileName = argv[3];
+	outputFileName = argv[3];
     b = make_jrb();
 	addJRBTree(parameter, b);
 	readInputFile(inputFileName, parameter);
