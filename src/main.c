@@ -32,17 +32,17 @@ void addJRBTree(char *parametre, JRB b){
         if(is->fields[i+1] != NULL && is->fields[i] != NULL && !strstr(is->fields[i], "}")){
 
             if(strstr(parametre, "e")){
-                p->key = (char *) malloc(sizeof(char)*(strlen(is->fields[i+1])+1));
-                strcpy(p->key, is->fields[i+1]);
-                p->value = (char *) malloc(sizeof(char)*(strlen(is->fields[i])+1));
-                strcpy(p->value, is->fields[i]);
-                (void) jrb_insert_str(b, p->key, new_jval_v((void *) p));
-            }
-            if(strstr(parametre, "d")){
                 p->key = (char *) malloc(sizeof(char)*(strlen(is->fields[i])+1));
                 strcpy(p->key, is->fields[i]);
                 p->value = (char *) malloc(sizeof(char)*(strlen(is->fields[i+1])+1));
                 strcpy(p->value, is->fields[i+1]);
+                (void) jrb_insert_str(b, p->key, new_jval_v((void *) p));
+            }
+            if(strstr(parametre, "d")){
+                p->key = (char *) malloc(sizeof(char)*(strlen(is->fields[i+1])+1));
+                strcpy(p->key, is->fields[i+1]);
+                p->value = (char *) malloc(sizeof(char)*(strlen(is->fields[i])+1));
+                strcpy(p->value, is->fields[i]);
                 (void) jrb_insert_str(b, p->key, new_jval_v((void *) p));
             }
 
@@ -53,58 +53,38 @@ void addJRBTree(char *parametre, JRB b){
 }
 // Kilit dosyasının okunacağı fonksiyon
 char *encode(char *data){
-    IS is;
-    int i;
 
-    is = new_inputstruct("kilit.txt");
-    if (is == NULL) {
-        perror("error");
-        exit(1);
-    }
+    jrb_traverse(bn, b) {
+        p = (Huffman *) bn->val.v;
 
-    while(get_line(is) >= 0) {
         char *text = "";
-        for (i = 0; i < is->NF; i++) {
-            if(strstr(is->fields[i], data)){
-                //returnValue(text, "-e");
-                text = is->fields[i + 1];
+        if(strstr(p->key, data)){
+                text = p->value;
                 char *ptr = strtok(text, "\"\"");
                 if(ptr != NULL){
                     return ptr;
                 }
-            }
         }
     }
-    jettison_inputstruct(is);
     return data;
 }
 
 
 // Kilit dosyasının okunacağı fonksiyon
 char *decode(char *data){
-    IS is;
-    int i;
 
-    is = new_inputstruct("kilit.txt");
-    if (is == NULL) {
-        perror("error");
-        exit(1);
-    }
+    jrb_traverse(bn, b) {
+        p = (Huffman *) bn->val.v;
 
-    while(get_line(is) >= 0) {
         char *text = "";
-        for (i = 0; i < is->NF; i++) {
-            if(strstr(is->fields[i], data)){
-                //returnValue(text, "-e");
-                text = is->fields[i - 1];
-                char *ptr = strtok(text,"\"\"");
+        if(strstr(p->key, data)){
+                text = p->value;
+                char *ptr = strtok(text, "\"\"");
                 if(ptr != NULL){
                     return ptr;
                 }
-            }
         }
     }
-    jettison_inputstruct(is);
     return data;
 }
 
@@ -142,12 +122,8 @@ int main(int argc, char** argv) {
 	char *inputFileName = argv[2];
 	char *outputFileName = argv[3];
     b = make_jrb();
-	addJRBTree("-e", b);
-    jrb_traverse(bn, b) {
-        p = (Huffman *) bn->val.v;
-        printf("%s %s\n", p->key, p->value);
-    }
-	//readInputFile(inputFileName, parameter);
+	addJRBTree(parameter, b);
+	readInputFile(inputFileName, parameter);
     
     return 0;
 }
