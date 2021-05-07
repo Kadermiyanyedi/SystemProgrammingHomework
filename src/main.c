@@ -23,7 +23,7 @@ void writeOutputFile(char *data){
 void addJRBTree(char *parametre, JRB b){
     IS is;
     int i;
-    is = new_inputstruct("kilit.txt");
+    is = new_inputstruct(".kilit");
     if (is == NULL) {
         perror("error");
         exit(1);
@@ -60,12 +60,16 @@ char *returnKey(char *data){
         p = (Huffman *) bn->val.v;
 
         char *text = "";
-        if(strstr(p->key, data)){
+        char *tmp= strtok(p->key, "\"\"");
+
+        if(tmp != NULL){
+            if(strcmp(tmp, data) == 0){
                 text = p->value;
                 char *ptr = strtok(text, "\"\"");
                 if(ptr != NULL){
                     return ptr;
                 }
+            }
         }
     }
     return data;
