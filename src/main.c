@@ -15,8 +15,9 @@ Huffman *p;
 
 void writeOutputFile(char *data){
     FILE *fp = fopen(outputFileName, "a");
-    fprintf(fp,"%s \n", data);
+    fprintf(fp,"%s ", data);
 	fclose(fp);
+    
 }
 
 void addJRBTree(char *parametre, JRB b){
@@ -99,6 +100,11 @@ int main(int argc, char** argv) {
 	char *parameter = argv[1];
 	char *inputFileName = argv[2];
 	outputFileName = argv[3];
+     FILE *file;
+    if (file = fopen(outputFileName, "r")){
+        remove(outputFileName);
+        
+    }
     b = make_jrb();
 	addJRBTree(parameter, b);
 	readInputFile(inputFileName, parameter);
