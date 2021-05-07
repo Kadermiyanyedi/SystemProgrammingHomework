@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "../include/fields.h"
+#include "fields.h"
 
 #define talloc(ty, sz) (ty *) malloc (sz * sizeof(ty))
 #define strdup(s) ((char *) strcpy(talloc(char, strlen(s)+1), s))

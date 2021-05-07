@@ -10,7 +10,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
-#include "../include/jrb.h"
+#include "jrb.h"
  
 typedef unsigned long UL;
 
