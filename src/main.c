@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 #include "../libfdr/fields.h"
 #include "../libfdr/jrb.h"
 
@@ -105,10 +106,10 @@ int main(int argc, char** argv) {
 	char *inputFileName = argv[2];
 	outputFileName = argv[3];
      FILE *file;
-    if (file = fopen(outputFileName, "r")){
+    if (file == fopen(outputFileName, "r")){
         remove(outputFileName);
-        
     }
+    
     b = make_jrb();
 	addJRBTree(parameter, b);
 	readInputFile(inputFileName, parameter);
