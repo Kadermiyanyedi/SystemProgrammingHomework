@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include "../libfdr/fields.h"
-#include "../libfdr/jrb.h"
+#include "fields.h"
+#include "jrb.h"
 
 JRB b;
 JRB bn;

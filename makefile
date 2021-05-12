@@ -1,12 +1,26 @@
-all: build run
+all: make cleanoutputfile run clean
 
-build:
-	gcc -o ./lib/dllist.o -c ./libfdr/dllist.c
-	gcc -o ./lib/fields.o -c ./libfdr/fields.c
-	gcc -o ./lib/jrb.o -c ./libfdr/jrb.c
-	gcc -o ./lib/jval.o -c ./libfdr/jval.c
-	gcc -o ./lib/main.o -c ./src/main.c
-	gcc -o ./bin/main ./lib/main.o ./lib/jval.o ./lib/jrb.o ./lib/fields.o ./lib/dllist.o
+make:
+	gcc -o ./dllist.o -c ./dllist.c
+	gcc -o ./fields.o -c ./fields.c
+	gcc -o ./jrb.o -c ./jrb.c
+	gcc -o ./jval.o -c ./jval.c
+	gcc -o ./main.o -c ./main.c
+	gcc -o ./kripto ./main.o ./jval.o ./jrb.o ./fields.o ./dllist.o
 
-run:
-	./bin/main
+run: cleanoutputfile
+	./kripto -e ./input.txt ./output.txt
+	./kripto -d ./output.txt ./output2.txt
+
+
+clean:
+	rm *.o
+
+cleanoutputfile: 
+	rm -rf output.txt
+	rm -rf output2.txt
+cleanall:
+	rm -rf *.o
+	rm -rf *.txt
+	rm -rf .kilit
+	rm kripto
