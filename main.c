@@ -26,7 +26,7 @@ void addJRBTree(char *parametre, JRB b){
     int i;
     is = new_inputstruct(".kilit");
     if (is == NULL) {
-        perror("error");
+        perror("Error! Not found a file");
         exit(1);
     }
 
@@ -83,7 +83,7 @@ void readInputFile(char* filename, char *operation){
 
     is = new_inputstruct(filename);
     if (is == NULL) {
-        perror("error");
+        perror("Error! Not found a file");
         exit(1);
     }
 
@@ -99,7 +99,7 @@ int main(int argc, char** argv) {
     //readInputFile();
     
     if (argc != 4) {
-    fprintf(stderr, "usage: printwords filename\n");
+    fprintf(stderr, "Eksik giris argumani\n");
     exit(1);
     }
 	char *parameter = argv[1];

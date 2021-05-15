@@ -1,6 +1,6 @@
 ## Sistem Programlama Dersi Proje Ödevi
 
-Proje kapsamında program verilen kitit dosyasındaki anahtarlara göre giriş dosyasını kriptolayabilecek ve kriptolanmış metni eski haline dönüştürebilecektir. Sonuçta ortaya çıkan metni ise çıkış dosyasına yazdıracaktır. Kütüphane olarak libfdr kütüphanesi kullanılacak ve C dilinde gerçeklenecektir. Program linux ortamında çalıştırılmalıdır.
+Proje kapsamında program verilen kitit dosyasındaki anahtarlara göre giriş dosyasını kriptolayabilecek ve kriptolanmış metni eski haline dönüştürebilecektir. Sonuçta ortaya çıkan metni ise çıkış dosyasına yazdıracaktır. Kütüphane olarak libfdr kütüphanesi kullanılacak ve C dilinde gerçeklenecektir. Program linux ortamında çalıştırılmalıdır. Proje içinde istenilen tüm görevler yerine getirilmiştir.
 
 ### Proje Ekibi
 
@@ -11,15 +11,15 @@ Proje kapsamında program verilen kitit dosyasındaki anahtarlara göre giriş d
 
 ### Makefile dosyasının yapısı
 
-- **all**: Sırası ile cleanoutputfile, make, run, clean komutlarını çalıştırır.
-- **make**: Projede yer alan .c dosyalarını derler ve kripto isimli çalıştırılabilir dosyayı üretir.
-- **run**: Eski output dosyalarını silecek komutu çağırır. Aşağıdaki komutları sırası ile çalıştırır.
+- **run**: Sırası ile clean, make, kriptola komutlarını çalıştırır.
+- **make**: Projede yer alan main.c dosyasını derler ve kripto isimli çalıştırılabilir dosyayı üretir.
+- **kriptola**: Aşağıdaki komutları sırası ile çalıştırır.
   kripto -e input.txt output.txt
   kripto -d output.txt output2.txt
-- **clean**: Tüm .o dosyalarını siler.
+- **clean**: Derleme sırasında oluşan dosyaları temizler.
 - **cleanall**: Tüm .o, .txt dosyalarını, kilit dosyasını ve çalıştırılabilir kripto dosyasını siler.
-- **cleanoutputfile**: output.txt ve output2.txt dosyalarını siler.
 
 ### Kullanım
 
+Proje içerisinde libfdr.a derlenmiş kütüphanesinin bulunduğundan emin olunuz.
 Proje klasörü içerisinde `make` komutunu çalıştırınız.
