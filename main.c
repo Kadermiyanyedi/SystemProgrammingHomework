@@ -23,7 +23,6 @@ void writeOutputFile(char *data){
 
 void addJRBTree(char *parametre, JRB b){
     IS is;
-    int i;
     is = new_inputstruct(".kilit");
     if (is == NULL) {
         perror("Error! Not found a file");
@@ -31,6 +30,8 @@ void addJRBTree(char *parametre, JRB b){
     }
 
     while(get_line(is) >= 0) {
+        for (int i = 0; i < is->NF; i++) {
+    
         p = malloc(sizeof(Huffman));
         if(is->fields[i+1] != NULL && is->fields[i] != NULL && !strstr(is->fields[i], "}")){
 
@@ -50,11 +51,11 @@ void addJRBTree(char *parametre, JRB b){
             }
 
         }
+        }
     }
     jettison_inputstruct(is);
 
 }
-// Kilit dosyasının okunacağı fonksiyon
 char *returnKey(char *data){
 
     jrb_traverse(bn, b) {
